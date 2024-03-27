@@ -1,1 +1,3 @@
-from .trainer import slide_level_train_step_without_mask, slide_level_val_step_without_mask
+"""Define Import"""
+
+from .trainer import slide_level_train_step, slide_level_val_step

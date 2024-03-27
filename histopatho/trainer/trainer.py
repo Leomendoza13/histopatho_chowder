@@ -1,9 +1,12 @@
+"""Define steps functions"""
+
 from typing import Optional, Tuple
 
 import numpy as np
 import torch
 
-def slide_level_train_step_without_mask(
+
+def slide_level_train_step(
     model: torch.nn.Module,
     train_dataloader: torch.utils.data.DataLoader,
     criterion: torch.nn.Module,
@@ -65,7 +68,7 @@ def slide_level_train_step_without_mask(
     return _epoch_loss, _epoch_logits, _epoch_labels
 
 
-def slide_level_val_step_without_mask(
+def slide_level_val_step(
     model: torch.nn.Module,
     val_dataloader: torch.utils.data.DataLoader,
     criterion: torch.nn.Module,

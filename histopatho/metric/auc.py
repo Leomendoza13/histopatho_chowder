@@ -1,5 +1,8 @@
+"""Define metric"""
+
 from sklearn.metrics import roc_auc_score
 import numpy as np
+
 
 def auc(labels: np.array, logits: np.array) -> float:
     """ROC AUC score for binary classification.
