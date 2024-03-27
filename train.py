@@ -69,6 +69,9 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate for training')
     parser.add_argument('--weight_decay', type=float, default=0.0, help='Weight decay for training')
     parser.add_argument(
+        '--bias', type=str, default="True", help='Whether to add bias for layers of the tiles MLP'
+    )
+    parser.add_argument(
         '--test_metadata_path',
         type=str,
         default='data/test_metadata.csv',
@@ -83,6 +86,14 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    if args.bias in ("False", "false", "0"):
+        bias = False
+    else:
+        bias = True
+
+    # Choose device for training (cuda if available, otherwise cpu)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+
     chowder_info = f"""\nChowder initialization with:
 
     - in_features=2048
@@ -90,7 +101,7 @@ if __name__ == '__main__':
     - n_bottom={args.n_bottom}
     - mlp_hidden={args.mlp_hidden}
     - mlp_activation=torch.nn.Sigmoid()
-    - bias=True
+    - bias={bias}
     """
 
     trainer_info = f"""TorchTrainer initialization with:
@@ -135,7 +146,7 @@ if __name__ == '__main__':
         n_bottom=args.n_bottom,
         mlp_hidden=args.mlp_hidden,
         mlp_activation=torch.nn.Sigmoid(),
-        bias=True,
+        bias=bias,
     )
 
     print(chowder_info)
@@ -144,9 +155,6 @@ if __name__ == '__main__':
     criterion = torch.nn.BCEWithLogitsLoss()
     optimizer = torch.optim.Adam
     metrics = {"auc": auc}
-
-    # Choose device for training (cuda if available, otherwise cpu)
-    device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # Initialize trainer for model training
     trainer = TorchTrainer(
