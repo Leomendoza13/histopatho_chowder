@@ -30,8 +30,8 @@ Then put the command
 - Create environnement
 
 ```
-    virtualenv-p python3.8 env
-    $source env/bin/activate
+    virtualenv -p python3.8 env
+    source env/bin/activate
 ```
 
 - Install requirements.txt
@@ -74,10 +74,10 @@ Put the data folder at the root of the project as below:
 | --train_val_split_ratio| float    | 80        | Ratio of training data to validation data                     |
 | --n_top                | int      | 5         | Number of top features for Chowder model                      |
 | --n_bottom             | int      | 5         | Number of bottom features for Chowder model                   |
-| --mlp_hidden           | list[int]| [200, 100]| List of integers representing the hidden layers of MLP        |
+| --mlp_hidden           | list[int]| 200 100 | List of integers representing the hidden layers of MLP        |
 | --batch_size           | int      | 16        | Batch size for training                                       |
 | --num_epochs           | int      | 15        | Number of epochs for training                                 |
-| --lr                   | float    | 1e-3      | Learning rate for training                                    |
+| --lr                   | float    | 0.001      | Learning rate for training                                    |
 | --weight_decay         | float    | 0.0       | Weight decay for training                                     |
 | --bias                 | str      | "True"    | Whether to add bias for layers of the tiles MLP               |
 | --test_metadata_path   | str      | 'data/test_metadata.csv'        | Path to test_metadata.csv to build output                    |
