@@ -1,6 +1,6 @@
 """Define Script"""
 
-import os
+import argparse
 import torch
 
 from histopatho.metric import auc
@@ -24,10 +24,55 @@ from HistoSSLscaling.rl_benchmarks.models import Chowder
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser(description='Chowder Model Training and Prediction on PIK3CA')
+
+    # Define command line arguments
+    parser.add_argument(
+        '--train_feature_dir',
+        type=str,
+        default='data/train_input/moco_features',
+        help='Directory containing training features',
+    )
+    parser.add_argument(
+        '--test_feature_dir',
+        type=str,
+        default='data/test_input/moco_features',
+        help='Directory containing testing features',
+    )
+    parser.add_argument(
+        '--labels_path',
+        type=str,
+        default='data/train_input/train_output_76GDcgx.csv',
+        help='Path to the training labels file',
+    )
+    parser.add_argument(
+        '--train_val_split_ratio',
+        type=float,
+        default=0.8,
+        help='Ratio of training data to validation data',
+    )
+    parser.add_argument(
+        '--n_top', type=int, default=5, help='Number of top features for Chowder model'
+    )
+    parser.add_argument(
+        '--n_bottom', type=int, default=5, help='Number of bottom features for Chowder model'
+    )
+    parser.add_argument('--batch_size', type=int, default=16, help='Batch size for training')
+    parser.add_argument('--num_epochs', type=int, default=15, help='Number of epochs for training')
+    parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate for training')
+    parser.add_argument(
+        '--output_path',
+        type=str,
+        default='train_output.csv',
+        help='Path to output CSV file with predictions',
+    )
+
+    args = parser.parse_args()
+
     # Define paths for training and testing data
-    train_path = 'data/train_input/moco_features'
-    train_labels_path = 'data/train_input/train_output_76GDcgx.csv'
-    test_path = 'data/test_input/moco_features'
+    train_path = args.train_feature_dir
+    train_labels_path = args.labels_path
+    test_path = args.test_feature_dir
 
     # Load training and testing data
     train_values = load_npy_from_dir(train_path)
@@ -50,8 +95,8 @@ if __name__ == '__main__':
     chowder = Chowder(
         in_features=2048,
         out_features=1,
-        n_top=5,
-        n_bottom=5,
+        n_top=args.n_top,
+        n_bottom=args.n_bottom,
         mlp_hidden=[200, 100],
         mlp_activation=torch.nn.Sigmoid(),
         bias=True,
@@ -72,9 +117,9 @@ if __name__ == '__main__':
         metrics=metrics,
         device=device,
         optimizer=optimizer,
-        batch_size=3,
-        num_epochs=3,
-        learning_rate=1e-3,
+        batch_size=args.batch_size,
+        num_epochs=args.num_epochs,
+        learning_rate=args.lr,
         weight_decay=0.0,
         train_step=slide_level_train_step,
         val_step=slide_level_val_step,
@@ -94,4 +139,4 @@ if __name__ == '__main__':
     prediction = predict(chowder, test_values_tensor)
 
     # Generate output CSV file with predictions
-    generate_output_csv('data/test_metadata.csv', prediction, os.path.join('.', 'train_output.csv'))
+    generate_output_csv('data/test_metadata.csv', prediction, args.output_path)
