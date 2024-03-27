@@ -1,0 +1,3 @@
+[submodule "HistoSSLscaling"]
+	path = HistoSSLscaling
+	url = git@github.com:owkin/HistoSSLscaling.git
