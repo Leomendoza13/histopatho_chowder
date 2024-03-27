@@ -1,4 +1,4 @@
-# Histography Using Chowder For PIK3CA Mutation
+# Detection of PIK3CA Mutation Using Chowder Model
 
 ## Setup
 
