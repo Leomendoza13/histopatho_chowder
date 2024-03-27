@@ -89,6 +89,8 @@ Put the data folder at the root of the project as below:
 ```
     python train.py --batch_size 15 --num_epochs 30
 ```
+
+The train_output.csv is then created at the root of the project by default.
  
 ## Report
 
