@@ -1,5 +1,10 @@
 # Report
 
+## Table of Contents
+
+- [Article understanding](#Article-understanding)
+- [My Work](#My-Work)
+
 ## Article understanding
 
 The article titled "Classification and Disease Localization in Histopathology Using Only Global Labels: A Weakly-Supervised Approach" authored by Pierre Courtiol, Eric W. Tramel, Marc Sanselme, and Gilles Wainrib from Owkin, Inc., New York City, delves into histopathology, which involves diagnosing and studying tissue diseases by examining them under a microscope. Specifically, the focus is on oncology histopathology.
@@ -26,7 +31,7 @@ The Chowder method, which is the principal point of interest, draws inspiration 
 
 ![alt text](imgs/figure2.png)
 
-## Experimental results
+### Experimental results
 
 ### Training Details
 
@@ -45,3 +50,15 @@ Here are the results:
 The study has demonstrated that leveraging state-of-the-art techniques from Multiple Instance Learning (MIL) in computer vision, allows for the construction of an effective technique for both diagnosis prediction and disease location within Whole Slide Images (WSI) in histopathology, all without the requirement of expensive localized annotations produced by expert pathologists.
 
 However, there remains improvements in the CHOWDER method, particularly in the generation of disease localization maps.
+
+## My Work
+
+### Build efficient, robust training pipeline for CHOWDER;
+
+
+To start the PIK3CA mutation detection challenge, I began reading the article and summarized its contents as i did above. Following this, I explored the provided code repository named "HistoSSLscaling," which contains the Chowder Model. Setting up my environment was the first step, which involved installing the necessary requirements from the requirements.txt. Then, I encountered an issue with the setup.py of the Chowder repository, so I had to add it as a Git submodule to use it.
+
+Even though I struggled with the code for a while, I eventually figured it out. I then started to code in a notebook environment to have a better visual on what i was doing. 
+Here, I initialized Chowder, fitted the data, and trained the model using a trainer they provide in their repository. Aftewards, I performed predictions and applied a sigmoid function to the output data that I transformed into a csv file. This gave me a metric score of 0.7315, securing the third position on the historic challenge leaderboard with my first submission.
+
+Following this achievement, I focused on refactoring my code for clarity and establishing a good project architecture. To maintain clean code, I used Continuous Integration (CI) tools such as black, pylint, pytest, and mypy. I finally developed a script allowing terminal usage for model training with the ability to specify desired hyperparameters using arguments parsing. (Cf. [README.md](../README.md))
