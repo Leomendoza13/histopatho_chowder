@@ -1,5 +1,6 @@
 """Define Script"""
 
+import os
 import argparse
 import torch
 
@@ -83,6 +84,12 @@ if __name__ == '__main__':
         default='train_output.csv',
         help='Path to output CSV file with predictions',
     )
+    parser.add_argument(
+        '--save',
+        type=str,
+        default='',
+        help='Path to save weights',
+    )
 
     args = parser.parse_args()
 
@@ -97,6 +104,7 @@ if __name__ == '__main__':
     chowder_info = f"""\nChowder initialization with:
 
     - in_features=2048
+    - out_features=1
     - n_top={args.n_top}
     - n_bottom={args.n_bottom}
     - mlp_hidden={args.mlp_hidden}
@@ -179,6 +187,11 @@ if __name__ == '__main__':
 
     print("\nBest train metric: " + str(max(train_metrics['auc'])))
     print("Best val metric: " + str(max(val_metrics['auc'])))
+
+    # save weights at ./weights/ if save_path is not empty
+    if len(args.save) != 0:
+        torch.save(chowder.state_dict(), os.path.join('weights', args.save))
+        print('\nWeights saved at weights/' + args.save)
 
     # Move model to device
     chowder = chowder.to(device)
