@@ -100,7 +100,7 @@ The train_output.csv, containing the predictions of each slides, is then created
 
 ```
     python train.py --batch_size 15 --num_epochs 30
-``
+```
  
 ## Report
 
