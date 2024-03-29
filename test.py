@@ -10,5 +10,7 @@ for i in range(50):
     # Execute training script for each model, saving weights with corresponding filename
     result = subprocess.run(["python", "train.py", "--save", file_name], check=True)
 
+    print('----------------------------------------')
+
 # After training all models, execute ensemble script to combine them
 result = subprocess.run(["python", "ensemble.py"], check=True)
