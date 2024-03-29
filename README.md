@@ -116,12 +116,13 @@ Do this above command as many as Chowder you want for the ensemble prediction.
 
 **BE CAREFUL: THE HYPERPARAMETERS OF EACH CHOWDER MUST BE THE SAME**
 
- - To ensemble predict on many Chowder use this command:
+ - To ensemble predict on many Chowder, use this command:
 
 ```
     python ensemble.py
 ```
 The script will loads the weights of each model in the weights directory.
+
 The ensemble_output.csv, containing the ensemble prediction (average predictions of every CHOWDER in weights directory) of each slides, is then created at the root of the project by default (can be changed with the output_path argument).
 
 **DON'T FORGET TO USE THE SAME PARAMETERS ARGUMENTS ON ENSEMBLE.PY AS TRAIN.PY**
