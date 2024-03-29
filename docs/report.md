@@ -58,7 +58,9 @@ However, there remains improvements in the CHOWDER method, particularly in the g
 
 ### Objectives
 
-The objectives of this repo is to train CHOWDER and produce predictions of the provided data features.
+- Train Chowder
+- Predict on dataset
+- Ensemble Chowder
 
 ### Python Setup
 
@@ -70,7 +72,7 @@ In the provided code, I realized many interesting classes for my project as:
  - The Datasets class to instanciate required datasets
  - The Trainer to train the model
 
-### Training Pipeline (First Topic)
+### Training Pipeline
 
 I then started to code in a notebook environment to get a better visual on what I was doing. 
 I initialized Chowder, fitted the data, and use the trainer on the model. Aftewards, I realized the tensor predictions was filled with negative values. I applied sigmoid to squash the output to get probabilities between 0 and 1 that I finally transformed into a csv file. 
@@ -109,7 +111,7 @@ Then, I focused on refactoring my code for clarity and establishing a good proje
 
 I finally developed a script allowing Command Line Interface (CLI) usage for model training with the ability to specify desired hyperparameters using arguments parsing. (Cf. [Training](../README.md#training) in REAMDE.md)
 
-### Ensemble (Second Topic)
+### Ensemble
 
 Ensemble learning in machine learning refers to a technique where multiple models are trained to solve the same problem, and their predictions are combined to improve overall performance. This approach aims to reduce the risk of errors and variance, leading to more accurate and robust predictions compared to individual models.
 By leveraging diverse model selection, reducing overfitting, and improving generalization, ensembles often outperform individual models. 
@@ -123,7 +125,7 @@ For more information, please refer [Ensemble Prediction](../README.md#Ensemble-P
 
 I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the results were not improved.
 
-### Solution to get better result with Ensemble
+### Solutions
 
 - Test with different sets of ensemble
 - Test ensemble prediction with differents Chowder hyperparameters
