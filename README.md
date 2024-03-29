@@ -138,4 +138,4 @@ python ensemble.py --n_top 2 --n_bottom 2
 
 ## Report
 
-You can find the project report by clicking on the link:[report](docs/report.md).
+You can find the project report by clicking on [Report](docs/report.md).

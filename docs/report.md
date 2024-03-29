@@ -113,6 +113,6 @@ Ensemble methods can be highly effective in the medical field because we priorit
 First, I saved the weights of two models in a directory at the root of the project (weights directory) using the train.py script. Afterward, I used a notebook to load the models along with their weights that I just saved. I made predictions with every model and then took the average of these predictions.
 
 To simplify ensemble training similar to the train.py script, I created an "ensemble.py" CLI script that can be used with many models as we want. The parameters can be specified for the models, but they have to be the same for each of them. 
-For more information, please refer [Ensemble Training](../README.md#Ensemble-Prediction) in the README.md file.
+For more information, please refer [Ensemble Prediction](../README.md#Ensemble-Prediction) in the README.md file.
 
 For my experience, I used 5 Chowders with the same parameters due to time constraints and the results were not significantly better than those of a single model to emphasize it.
