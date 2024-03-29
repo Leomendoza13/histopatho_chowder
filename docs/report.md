@@ -51,14 +51,53 @@ The study has demonstrated that leveraging state-of-the-art techniques from Mult
 
 However, there remains improvements in the CHOWDER method, particularly in the generation of disease localization maps.
 
-## My Work
+## Implementation
 
-### Build efficient, robust training pipeline for CHOWDER;
+### Objectives
 
+The objectives of this repo is to train CHOWDER and to produce predictions.
+
+### Python Setup
 
 To start the PIK3CA mutation detection challenge, I began reading the article and summarized its contents as i did above. Following this, I explored the provided code repository named "HistoSSLscaling," which contains the Chowder Model. Setting up my environment was the first step, which involved installing the necessary requirements from the requirements.txt. Then, I encountered an issue with the setup.py of the Chowder repository, so I had to add it as a Git submodule to use it.
 
-Even though I struggled with the code for a while, I eventually figured it out. I then started to code in a notebook environment to have a better visual on what i was doing. 
-Here, I initialized Chowder, fitted the data, and trained the model using a trainer they provide in their repository. Aftewards, I performed predictions and applied a sigmoid function to the output data that I transformed into a csv file. This gave me a metric score of 0.7315, securing the third position on the historic challenge leaderboard with my first submission.
+In the provided code, I realized many interesting packages for my project as:
 
-Following this achievement, I focused on refactoring my code for clarity and establishing a good project architecture. To maintain clean code, I used Continuous Integration (CI) tools such as black, pylint, pytest, and mypy. I finally developed a script allowing terminal usage for model training with the ability to specify desired hyperparameters using arguments parsing. (Cf. [README.md](../README.md))
+ - The Chowder class to instanciate the model
+ - The Datasets class to instanciate required datasets
+ - The Trainer to train the model
+
+### Training Pipeline (First Topic)
+
+I then started to code in a notebook environment to get a better visual on what i was doing. 
+Here, I initialized Chowder, fitted the data, and trained the model using the trainer. Aftewards, I realized the tensor predictions was filled with negative values. I  then applied a sigmoid function to the output data that I finally transformed into a csv file. This gave me a metric score of 0.7315, securing the third position on the historic challenge leaderboard with my first submission. The parameters used for this first result were the defaults one:
+
+- Chowder Model parameters:
+    - in_features=2048
+    - out_features=1
+    - n_top=5
+    - n_bottom=5
+    - mlp_hidden=[200, 100]
+    - mlp_activation=torch.nn.Sigmoid()
+    - bias=True
+- Trainer parameters:
+    - model=Chowder
+    - criterion=BCEWithLogitsLoss
+    - metrics={'auc': auc}
+    - device=cuda
+    - optimizer=Adam
+    - batch_size=16
+    - num_epochs=15
+    - learning_rate=0.001
+    - weight_decay=0.0
+
+Following this achievement, I focused on refactoring my code for clarity and establishing a good project architecture. To maintain clean code, I used Continuous Integration (CI) tools such as :
+
+- Black, a code formatter that automatically formats Python code to adhere to the PEP 8 style guide.
+- Pylint, a static code analysis tool that checks Python code for errors, potential bugs, and adherence to coding standards outlined in PEP 8
+- Pytest, a testing framework in Python used for writing and executing unit tests, allowing developers to easily create and run tests for their code.
+- Mypy, a static type checker for Python, enabling developers to enforce and check type annotations in Python code, enhancing code quality and catching potential type-related errors.
+
+I finally developed a script allowing Command Line Interface (CLI) usage for model training with the ability to specify desired hyperparameters using arguments parsing. (Cf. [README.md](../README.md))
+
+### Ensemble (Second Topic)
