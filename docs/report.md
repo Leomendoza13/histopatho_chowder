@@ -125,7 +125,7 @@ First, I saved the weights of two models in a directory at the root of the proje
 To simplify ensemble training similar to the train.py script, I created an ensemble.py CLI script that can be used with many models. The parameters can be specified for the models, but they have to be the same for each of them. 
 For more information, please refer [Ensemble Prediction](../README.md#Ensemble-Prediction) in the README.md file.
 
-I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the result was not relevant.
+I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the result was not relevant. (test.py)
 
 ### Solutions
 
