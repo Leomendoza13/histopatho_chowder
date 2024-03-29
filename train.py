@@ -95,7 +95,7 @@ if __name__ == '__main__':
         '--save',
         type=str,
         default='',
-        help='Path to save weights',
+        help='Name of the pth file',
     )
 
     args = parser.parse_args()

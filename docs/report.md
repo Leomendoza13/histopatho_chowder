@@ -36,9 +36,12 @@ The Chowder method, which is the principal point of interest, draws inspiration 
 ### Training Details
 
 To address overfitting, strong regularization techniques are employed in the Chowder method. An L2 regularization of 0.5 is applied on the convolution feature embedding layer, and dropout with a rate of 0.5 is used on the MLP. Training is conducted using the Adam optimizer to minimize the binary cross-entropy loss over 30 epochs, with a mini-batch size of 10 and a learning rate of 0.001.
+
 To reduce variance and prevent overfitting, an ensemble of E Chowder networks is trained, each differing only by their initial weights. The final prediction is established by averaging the predictions made by these E networks. For Table S1, E is set to 10, while for the Camelyon-16 leaderboards, E is set to 50 with R = 5. E is set to 10 for the WELDON results.
 There are two challenges. 
+
 The first challenge, TCGA, provides 11,000 tissue slide images of cancers from various organs. The study focuses on 707 lung cancer slides (TCGA-lung), predicting whether each slide contains adenocarcinoma or squamous cell carcinoma. Classification quality is evaluated based on the area under the curve (AUC) of the receiver operating characteristic (ROC) curve generated using the raw output predictions. 
+
 The second challenge, Camelyon-16, provides labeling and segmentation masks for each WSI, representing expert analysis on the location of metastases within the slide. Only diagnosis labels are used, and the segmentation masks are set aside. Evaluation of the Camelyon-16 dataset is conducted on two axes, the accuracy of the predicted label for each wsi based on AUC and the accuracy of metastasis localization, evaluated by comparing model outputs to the ground-truth expert annotations of metastasis location using free ROC metric (FROC).
 
 Here are the results:
@@ -59,9 +62,9 @@ The objectives of this repo is to train CHOWDER and produce predictions of the p
 
 ### Python Setup
 
-To start the PIK3CA mutation detection challenge, I began reading the article and summarized its contents as i did above. Following this, I explored the provided code repository named "HistoSSLscaling," which contains the Chowder Model. Setting up my environment was the first step, which involved installing the necessary requirements from the requirements.txt. Then, I encountered an issue with the setup.py of the Chowder repository, so I had to add it as a Git submodule to use it.
+To start the PIK3CA mutation detection challenge, I began reading the article and summarized its contents as I did above. Following this, I explored the provided code repository named "HistoSSLscaling," which contains the Chowder Model. Setting up my environment was the first step, which involved installing the necessary requirements from the requirements.txt. Then, I encountered an issue with the setup.py of the Chowder repository, so I had to add it as a Git submodule to use it.
 
-In the provided code, I realized many interesting packages for my project as:
+In the provided code, I realized many interesting classes for my project as:
 
  - The Chowder class to instanciate the model
  - The Datasets class to instanciate required datasets
@@ -69,8 +72,10 @@ In the provided code, I realized many interesting packages for my project as:
 
 ### Training Pipeline (First Topic)
 
-I then started to code in a notebook environment to get a better visual on what i was doing. 
-Here, I initialized Chowder, fitted the data, and trained the model using the trainer. Aftewards, I realized the tensor predictions was filled with negative values. I  then applied a sigmoid function to the output data that I finally transformed into a csv file. This gave me a metric score of 0.7315, securing the third position on the historic challenge leaderboard with my first submission. The parameters used for this first result were the defaults one:
+I then started to code in a notebook environment to get a better visual on what I was doing. 
+I initialized Chowder, fitted the data, and use the trainer on the model. Aftewards, I realized the tensor predictions was filled with negative values. I applied sigmoid to squash the output to get probabilities between 0 and 1 that I finally transformed into a csv file. 
+This gave me a metric score of 0.7151, securing the third position on the historic challenge leaderboard with my first submission.
+The parameters used for this first result were the default ones:
 
 - Chowder Model parameters:
 
@@ -95,7 +100,7 @@ Here, I initialized Chowder, fitted the data, and trained the model using the tr
     - learning_rate=0.001
     - weight_decay=0.0
 
-Following this achievement, I focused on refactoring my code for clarity and establishing a good project architecture. To maintain clean code, I used Continuous Integration (CI) tools such as :
+Then, I focused on refactoring my code for clarity and establishing a good project architecture. To maintain clean code, I used a Continuous Integration (CI), including these tools such as :
 
 - Black, a code formatter that automatically formats Python code to adhere to the PEP 8 style guide.
 - Pylint, a static code analysis tool that checks Python code for errors, potential bugs, and adherence to coding standards outlined in PEP 8
@@ -107,12 +112,19 @@ I finally developed a script allowing Command Line Interface (CLI) usage for mod
 ### Ensemble (Second Topic)
 
 Ensemble learning in machine learning refers to a technique where multiple models are trained to solve the same problem, and their predictions are combined to improve overall performance. This approach aims to reduce the risk of errors and variance, leading to more accurate and robust predictions compared to individual models.
-By leveraging diverse model selection, reducing overfitting, and improving generalization, ensembles often outperform individual models. They are more robust to noise, offer error correction, and demonstrate improved performance stability across different datasets. 
-Ensemble methods can be highly effective in the medical field because we prioritize achieving the correct diagnosis for the patient, even if it takes time to train all the models.
+By leveraging diverse model selection, reducing overfitting, and improving generalization, ensembles often outperform individual models. 
+They are more robust to noise, offer error correction, and demonstrate improved performance stability across different datasets. 
+Ensemble methods can be highly effective in the medical field because we prioritize achieving the correct diagnosis for the patient, there are no contraints of response time for prediction.
 
-First, I saved the weights of two models in a directory at the root of the project (weights directory) using the train.py script. Afterward, I used a notebook to load the models along with their weights that I just saved. I made predictions with every model and then took the average of these predictions.
+First, I saved the weights of two models in a directory at the root of the project (`weights` directory) using the train.py script. Afterward, I used a notebook to load the models along with their weights. I then computed the average of theses predictions.
 
-To simplify ensemble training similar to the train.py script, I created an "ensemble.py" CLI script that can be used with many models as we want. The parameters can be specified for the models, but they have to be the same for each of them. 
+To simplify ensemble training similar to the train.py script, I created an ensemble.py CLI script that can be used with many models. The parameters can be specified for the models, but they have to be the same for each of them. 
 For more information, please refer [Ensemble Prediction](../README.md#Ensemble-Prediction) in the README.md file.
 
-For my experience, I used 5 Chowders with the same parameters due to time constraints and the results were not significantly better than those of a single model to emphasize it.
+I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the results were not improved.
+
+### Solution to get better result with Ensemble
+
+- Test with different sets of ensemble
+- Test ensemble prediction with differents Chowder hyperparameters
+- Hyperparameters Tuning (process of adjusting the settings of machine learning algorithm to optimize its performance on a given dataset)
