@@ -68,6 +68,8 @@ By default, the data folder must be at the root of the project as below:
 
 ## Usage
 
+### Training
+
 - To train Chowder and predict on the test data, use this command:
 
 ```
@@ -101,7 +103,37 @@ The train_output.csv, containing the predictions of each slides, is then created
 ```
     python train.py --batch_size 15 --num_epochs 30
 ```
- 
+
+### Ensemble Prediction
+
+You first have to train multiple Chowder and save the weights. To do so, use this command:
+
+```
+python train.py --save <filename>.pth
+```
+The weights will be save at the weights directory at the root of the project.
+Do this above command as many as Chowder you want for the ensemble prediction.
+
+**BE CAREFUL: THE HYPERPARAMETERS OF EACH CHOWDER MUST BE THE SAME**
+
+ - To ensemble predict on many Chowder use this command:
+
+```
+    python ensemble.py
+```
+The script will loads the weights of each model in the weights directory.
+The ensemble_output.csv, containing the ensemble prediction (average predictions of every CHOWDER in weights directory) of each slides, is then created at the root of the project by default (can be changed with the output_path argument).
+
+**DON'T FORGET TO USE THE SAME PARAMETERS ARGUMENTS ON ENSEMBLE.PY AS TRAIN.PY**
+
+- Example:
+
+```
+python train.py --n_top 2 --n_bottom 2 --save weights1.pth
+python train.py --n_top 2 --n_bottom 2 --save weights2.pth
+python ensemble.py --n_top 2 --n_bottom 2
+```
+
 ## Report
 
 Here's is the [report](docs/report.md).

@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Article understanding](#Article-understanding)
-- [My Work](#My-Work)
+- [Implementation](#Implementation)
 
 ## Article understanding
 
@@ -55,7 +55,7 @@ However, there remains improvements in the CHOWDER method, particularly in the g
 
 ### Objectives
 
-The objectives of this repo is to train CHOWDER and to produce predictions.
+The objectives of this repo is to train CHOWDER and produce predictions of the provided data features.
 
 ### Python Setup
 
@@ -98,6 +98,19 @@ Following this achievement, I focused on refactoring my code for clarity and est
 - Pytest, a testing framework in Python used for writing and executing unit tests, allowing developers to easily create and run tests for their code.
 - Mypy, a static type checker for Python, enabling developers to enforce and check type annotations in Python code, enhancing code quality and catching potential type-related errors.
 
-I finally developed a script allowing Command Line Interface (CLI) usage for model training with the ability to specify desired hyperparameters using arguments parsing. (Cf. [README.md](../README.md))
+I finally developed a script allowing Command Line Interface (CLI) usage for model training with the ability to specify desired hyperparameters using arguments parsing. (Cf. [Training](../README.md#training) in REAMDE.md)
 
 ### Ensemble (Second Topic)
+
+Ensemble learning in machine learning refers to a technique where multiple models are trained to solve the same problem, and their predictions are combined to improve overall performance. This approach aims to reduce the risk of errors and variance, leading to more accurate and robust predictions compared to individual models.
+By leveraging diverse model selection, reducing overfitting, and improving generalization, ensembles often outperform individual models. They are more robust to noise, offer error correction, and demonstrate improved performance stability across different datasets. 
+Ensemble methods can be highly effective in the medical field because we prioritize achieving the correct diagnosis for the patient, even if it takes time to train all the models.
+
+First, I saved the weights of two models in a directory at the root of the project (weights directory) using the train.py script. Afterward, I used a notebook to load the models along with their weights that I just saved. I made predictions with every model and then took the average of these predictions.
+
+To simplify ensemble training similar to the train.py script, I created an "ensemble.py" CLI script that can be used with many models as we want. The parameters can be specified for the models, but they have to be the same for each of them. 
+For more information, please refer [Ensemble Training](../README.md#Ensemble-Training) in the README.md file.
+
+Ensemble learning is supposed to 
+
+For my experience, I used 5 Chowders with the same parameters due to time constraints and the results were not significantly better than those of a single model to emphasize it.
