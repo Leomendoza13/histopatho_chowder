@@ -114,6 +114,7 @@ I finally developed a script allowing Command Line Interface (CLI) usage for mod
 ### Ensemble
 
 Ensemble learning in machine learning refers to a technique where multiple models are trained to solve the same problem, and their predictions are combined to improve overall performance. This approach aims to reduce the risk of errors and variance, leading to more accurate and robust predictions compared to individual models.
+
 By leveraging diverse model selection, reducing overfitting, and improving generalization, ensembles often outperform individual models. 
 They are more robust to noise, offer error correction, and demonstrate improved performance stability across different datasets. 
 Ensemble methods can be highly effective in the medical field because we prioritize achieving the correct diagnosis for the patient, there are no contraints of response time for prediction.
@@ -123,10 +124,10 @@ First, I saved the weights of two models in a directory at the root of the proje
 To simplify ensemble training similar to the train.py script, I created an ensemble.py CLI script that can be used with many models. The parameters can be specified for the models, but they have to be the same for each of them. 
 For more information, please refer [Ensemble Prediction](../README.md#Ensemble-Prediction) in the README.md file.
 
-I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the results were not improved.
+I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the result was not relevant.
 
 ### Solutions
 
-- Test with different sets of ensemble
-- Test ensemble prediction with differents Chowder hyperparameters
-- Hyperparameters Tuning (process of adjusting the settings of machine learning algorithm to optimize its performance on a given dataset)
+- Test with different ensemble sets
+- Test ensemble predictions with different Chowder hyperparameters
+- Hyperparameters Tuning (process of adjusting the settings of machine learning algorithms to optimize its performance on a given dataset)

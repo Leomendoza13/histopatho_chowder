@@ -128,7 +128,18 @@ The script will loads the weights of each model in the `weights` directory.
 
 The ensemble_output.csv, containing the ensemble prediction (average predictions of every CHOWDER in `weights` directory) of each slides, is then created at the root of the project by default (can be changed with the output_path argument).
 
-**DISCLAIMER 2:** Don't forget tu use the same parameters arguments on ensemble.py as train.py
+**DISCLAIMER 2:** Don't forget to use the same parameters arguments on ensemble.py as train.py
+
+| Arguments              | Type     | Default   | Description                                                  |
+|------------------------|----------|-----------|--------------------------------------------------------------|
+| --test_feature_dir     | str      | 'data/test_input/moco_features'  | Directory containing testing features                   |
+| --n_top                | int      | 5         | Number of top features for Chowder model                      |
+| --n_bottom             | int      | 5         | Number of bottom features for Chowder model                   |
+| --mlp_hidden           | list[int]| 200 100 | List of integers representing the hidden layers of MLP        |
+| --mlp_dropout           | list[Float]| None | Dropout that is used for each layer of the MLP. If `None`, no dropout is used. |
+| --bias                 | str      | "True"    | Whether to add bias for layers of the tiles MLP               |
+| --test_metadata_path   | str      | 'data/test_metadata.csv'        | Path to test_metadata.csv to build output                    |
+| --output_path          | str      | 'train_output.csv'               | Path to output CSV file with predictions                     |
 
 - Example:
 
