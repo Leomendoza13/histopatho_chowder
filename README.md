@@ -12,40 +12,41 @@ This project uses a model called Chowder to predict the probability of a PIK3CA 
 
 To set up the project environment, follow these steps:
 
-Install Python3.8
+Install Python3.8:
 
 ```
-    sudo add-apt-repository ppa:deadsnakes/ppa
+sudo add-apt-repository ppa:deadsnakes/ppa
 ```
 During installation, the system will ask you to press “Enter” from your keyboard to continue and complete the process.
-Then put the command
-```
-    sudo apt install python3.8 -y
-```
-
-Pull submodule
+Then put the command:
 
 ```
-    git submodule update --init
+sudo apt install python3.8 -y
 ```
 
-Install virtualenv
+Pull submodule:
 
 ```
-    python -m pip install --user virtualenv
+git submodule update --init
 ```
 
-Create environnement
+Install virtualenv:
 
 ```
-    virtualenv -p python3.8 env
-    source env/bin/activate
+python -m pip install --user virtualenv
 ```
 
-Install requirements.txt
+Create environnement:
 
 ```
-    pip install -r requirements.txt
+virtualenv -p python3.8 env
+source env/bin/activate
+```
+
+Install requirements.txt:
+
+```
+pip install -r requirements.txt
 ```
 
 Download data at https://challengedata.ens.fr/participants/challenges/98/
@@ -70,15 +71,15 @@ By default, the data folder must be at the root of the project as below:
 
 ### Training
 
-- To train Chowder and predict on the test dataset, use this command:
+To train Chowder and predict on the test dataset, use this command:
 
 ```
-    python train.py
+python train.py
 ```
 
-The train_output.csv, containing the predictions of each slides, is then created at the root of the project by default (can be changed with the output_path argument).
+The `train_output.csv`, containing the predictions of each slides, is then created at the root of the project by default (can be changed with the output_path argument).
 
-- These arguments can be used:
+These arguments can be used:
 
 | Arguments              | Type     | Default   | Description                                                  |
 |------------------------|----------|-----------|--------------------------------------------------------------|
@@ -100,10 +101,10 @@ The train_output.csv, containing the predictions of each slides, is then created
 | --save          | str      | ''               | 'Name of the pth file'               |
 
 
-- Example
+Example:
 
 ```
-    python train.py --batch_size 15 --num_epochs 30
+python train.py --batch_size 15 --num_epochs 30
 ```
 
 ### Ensemble Prediction
@@ -119,16 +120,18 @@ Do this above command as many as Chowder you want for the ensemble prediction.
 
 **DISCLAIMER 1:** The hyperparameters of each chowder must be the same.
 
- - To ensemble predict on many Chowder, use this command:
+To ensemble predict on many Chowder, use this command:
 
 ```
-    python ensemble.py
+python ensemble.py
 ```
 The script will loads the weights of each model in the `weights` directory.
 
 The ensemble_output.csv, containing the ensemble prediction (average predictions of every CHOWDER in `weights` directory) of each slides, is then created at the root of the project by default (can be changed with the output_path argument).
 
-**DISCLAIMER 2:** Don't forget to use the same parameters arguments on ensemble.py as train.py
+**DISCLAIMER 2:** Don't forget to use the same parameters arguments on `ensemble.py` that you used on each `train.py`
+
+These arguments can be used:
 
 | Arguments              | Type     | Default   | Description                                                  |
 |------------------------|----------|-----------|--------------------------------------------------------------|
@@ -141,7 +144,7 @@ The ensemble_output.csv, containing the ensemble prediction (average predictions
 | --test_metadata_path   | str      | 'data/test_metadata.csv'        | Path to test_metadata.csv to build output                    |
 | --output_path          | str      | 'train_output.csv'               | Path to output CSV file with predictions                     |
 
-- Example:
+Example:
 
 ```
 python train.py --n_top 2 --n_bottom 2 --save weights1.pth

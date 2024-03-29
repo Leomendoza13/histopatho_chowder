@@ -64,7 +64,7 @@ However, there remains improvements in the CHOWDER method, particularly in the g
 
 ### Python Setup
 
-To start the PIK3CA mutation detection challenge, I began reading the article and summarized its contents as I did above. Following this, I explored the provided code repository named "HistoSSLscaling," which contains the Chowder Model. Setting up my environment was the first step, which involved installing the necessary requirements from the requirements.txt. Then, I encountered an issue with the setup.py of the Chowder repository, so I had to add it as a Git submodule to use it.
+To start the PIK3CA mutation detection challenge, I began reading the article and summarized its contents as I did above. Following this, I explored the provided code repository named `HistoSSLscaling`, which contains the Chowder Model. Setting up my environment was the first step, which involved installing the necessary requirements from the `requirements.txt`. Then, I encountered an issue with the `setup.py` of the Chowder repository, so I had to add it as a Git submodule to use it.
 
 In the provided code, I realized many interesting classes for my project as:
 
@@ -125,7 +125,7 @@ First, I saved the weights of two models in a directory at the root of the proje
 To simplify ensemble training similar to the train.py script, I created an ensemble.py CLI script that can be used with many models. The parameters can be specified for the models, but they have to be the same for each of them. 
 For more information, please refer [Ensemble Prediction](../README.md#Ensemble-Prediction) in the README.md file.
 
-I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the result was not relevant. (test.py)
+I tried to reproduce the experiment of the paper, using 50 chowders with differents weights initialization but unfortunately, the result was not relevant. (`test.py`)
 
 ### Solutions
 
