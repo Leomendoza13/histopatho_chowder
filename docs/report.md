@@ -117,6 +117,7 @@ Ensemble learning in machine learning refers to a technique where multiple model
 
 By leveraging diverse model selection, reducing overfitting, and improving generalization, ensembles often outperform individual models. 
 They are more robust to noise, offer error correction, and demonstrate improved performance stability across different datasets. 
+
 Ensemble methods can be highly effective in the medical field because we prioritize achieving the correct diagnosis for the patient, there are no contraints of response time for prediction.
 
 First, I saved the weights of two models in a directory at the root of the project (`weights` directory) using the train.py script. Afterward, I used a notebook to load the models along with their weights. I then computed the average of theses predictions.
