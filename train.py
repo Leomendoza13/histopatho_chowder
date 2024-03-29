@@ -65,6 +65,13 @@ if __name__ == '__main__':
         default=[200, 100],
         help="List of integers representing the hidden layers of MLP.",
     )
+    parser.add_argument(
+        "--mlp_dropout",
+        nargs="+",
+        type=float,
+        default=None,
+        help="Dropout that is used for each layer of the MLP. If `None`, no dropout is used.",
+    )
     parser.add_argument('--batch_size', type=int, default=16, help='Batch size for training')
     parser.add_argument('--num_epochs', type=int, default=15, help='Number of epochs for training')
     parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate for training')
@@ -109,6 +116,7 @@ if __name__ == '__main__':
     - n_top={args.n_top}
     - n_bottom={args.n_bottom}
     - mlp_hidden={args.mlp_hidden}
+    - mlp_dropout={args.mlp_dropout}
     - mlp_activation=torch.nn.Sigmoid()
     - bias={bias}
     """
@@ -156,6 +164,7 @@ if __name__ == '__main__':
         mlp_hidden=args.mlp_hidden,
         mlp_activation=torch.nn.Sigmoid(),
         bias=bias,
+        mlp_dropout=args.mlp_dropout,
     )
 
     print(chowder_info)

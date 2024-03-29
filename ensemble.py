@@ -35,6 +35,13 @@ if __name__ == '__main__':
         help="List of integers representing the hidden layers of MLP.",
     )
     parser.add_argument(
+        "--mlp_dropout",
+        nargs="+",
+        type=float,
+        default=None,
+        help="Dropout that is used for each layer of the MLP. If `None`, no dropout is used.",
+    )
+    parser.add_argument(
         '--bias', type=str, default="True", help='Whether to add bias for layers of the tiles MLP'
     )
     parser.add_argument(
@@ -67,6 +74,7 @@ if __name__ == '__main__':
     - n_top={args.n_top}
     - n_bottom={args.n_bottom}
     - mlp_hidden={args.mlp_hidden}
+    - mlp_dropout={args.mlp_dropout}
     - mlp_activation=torch.nn.Sigmoid()
     - bias={bias}
     """
@@ -85,6 +93,7 @@ if __name__ == '__main__':
             n_top=args.n_top,
             n_bottom=args.n_bottom,
             mlp_hidden=args.mlp_hidden,
+            mlp_dropout=args.mlp_dropout,
             mlp_activation=torch.nn.Sigmoid(),
             bias=bias,
         ).to(device)

@@ -73,14 +73,18 @@ I then started to code in a notebook environment to get a better visual on what 
 Here, I initialized Chowder, fitted the data, and trained the model using the trainer. Aftewards, I realized the tensor predictions was filled with negative values. I  then applied a sigmoid function to the output data that I finally transformed into a csv file. This gave me a metric score of 0.7315, securing the third position on the historic challenge leaderboard with my first submission. The parameters used for this first result were the defaults one:
 
 - Chowder Model parameters:
+
     - in_features=2048
     - out_features=1
     - n_top=5
     - n_bottom=5
     - mlp_hidden=[200, 100]
+    - mlp_dropout=None
     - mlp_activation=torch.nn.Sigmoid()
     - bias=True
+
 - Trainer parameters:
+
     - model=Chowder
     - criterion=BCEWithLogitsLoss
     - metrics={'auc': auc}

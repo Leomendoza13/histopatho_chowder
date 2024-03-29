@@ -89,6 +89,7 @@ The train_output.csv, containing the predictions of each slides, is then created
 | --n_top                | int      | 5         | Number of top features for Chowder model                      |
 | --n_bottom             | int      | 5         | Number of bottom features for Chowder model                   |
 | --mlp_hidden           | list[int]| 200 100 | List of integers representing the hidden layers of MLP        |
+| --mlp_dropout           | list[Float]| None | Dropout that is used for each layer of the MLP. If `None`, no dropout is used. |
 | --batch_size           | int      | 16        | Batch size for training                                       |
 | --num_epochs           | int      | 15        | Number of epochs for training                                 |
 | --lr                   | float    | 0.001      | Learning rate for training                                    |
@@ -137,4 +138,4 @@ python ensemble.py --n_top 2 --n_bottom 2
 
 ## Report
 
-Here's is the [report](docs/report.md).
+You can find the project report by clicking on the link:[report](docs/report.md).
