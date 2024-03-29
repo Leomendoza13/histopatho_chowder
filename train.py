@@ -93,6 +93,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    # Determine bias value based on input arguments
     if args.bias in ("False", "false", "0"):
         bias = False
     else:
@@ -197,8 +198,7 @@ if __name__ == '__main__':
     chowder = chowder.to(device)
 
     # Move testing data to device
-    test_values_tensor = torch.tensor(test_values)
-    test_values_tensor = test_values_tensor.to(device)
+    test_values_tensor = torch.tensor(test_values).to(device)
 
     # Make predictions on testing data
     prediction = predict(chowder, test_values_tensor)
